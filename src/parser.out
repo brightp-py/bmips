@@ -1,0 +1,428 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    COLON
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> START
+Rule 2     program -> program COMMENT
+Rule 3     pre -> PREGEN
+Rule 4     pre -> PREGEN STRING
+Rule 5     pre -> PREGEN CONSTANT
+Rule 6     pre -> PREGEN LABELREF
+Rule 7     pre -> GLOBL
+Rule 8     arg -> CONSTANT
+Rule 9     arg -> REGISTER
+Rule 10    arg -> LPAREN REGISTER RPAREN
+Rule 11    arg -> LABELREF
+Rule 12    arg -> CONSTANT LPAREN arg RPAREN
+Rule 13    line -> INSTR arg COMMA arg COMMA arg
+Rule 14    line -> INSTR arg COMMA arg
+Rule 15    line -> INSTR arg
+Rule 16    line -> INSTR
+Rule 17    program -> program line
+Rule 18    program -> program LABEL
+Rule 19    program -> program pre
+
+Terminals, with rules where they appear
+
+COLON                : 
+COMMA                : 13 13 14
+COMMENT              : 2
+CONSTANT             : 5 8 12
+GLOBL                : 7
+INSTR                : 13 14 15 16
+LABEL                : 18
+LABELREF             : 6 11
+LPAREN               : 10 12
+PREGEN               : 3 4 5 6
+REGISTER             : 9 10
+RPAREN               : 10 12
+START                : 1
+STRING               : 4
+error                : 
+
+Nonterminals, with rules where they appear
+
+arg                  : 12 13 13 13 14 14 15
+line                 : 17
+pre                  : 19
+program              : 2 17 18 19 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . START
+    (2) program -> . program COMMENT
+    (17) program -> . program line
+    (18) program -> . program LABEL
+    (19) program -> . program pre
+
+    START           shift and go to state 2
+
+    program                        shift and go to state 1
+
+state 1
+
+    (0) S' -> program .
+    (2) program -> program . COMMENT
+    (17) program -> program . line
+    (18) program -> program . LABEL
+    (19) program -> program . pre
+    (13) line -> . INSTR arg COMMA arg COMMA arg
+    (14) line -> . INSTR arg COMMA arg
+    (15) line -> . INSTR arg
+    (16) line -> . INSTR
+    (3) pre -> . PREGEN
+    (4) pre -> . PREGEN STRING
+    (5) pre -> . PREGEN CONSTANT
+    (6) pre -> . PREGEN LABELREF
+    (7) pre -> . GLOBL
+
+    COMMENT         shift and go to state 3
+    LABEL           shift and go to state 5
+    INSTR           shift and go to state 7
+    PREGEN          shift and go to state 8
+    GLOBL           shift and go to state 9
+
+    line                           shift and go to state 4
+    pre                            shift and go to state 6
+
+state 2
+
+    (1) program -> START .
+
+    COMMENT         reduce using rule 1 (program -> START .)
+    LABEL           reduce using rule 1 (program -> START .)
+    INSTR           reduce using rule 1 (program -> START .)
+    PREGEN          reduce using rule 1 (program -> START .)
+    GLOBL           reduce using rule 1 (program -> START .)
+    $end            reduce using rule 1 (program -> START .)
+
+
+state 3
+
+    (2) program -> program COMMENT .
+
+    COMMENT         reduce using rule 2 (program -> program COMMENT .)
+    LABEL           reduce using rule 2 (program -> program COMMENT .)
+    INSTR           reduce using rule 2 (program -> program COMMENT .)
+    PREGEN          reduce using rule 2 (program -> program COMMENT .)
+    GLOBL           reduce using rule 2 (program -> program COMMENT .)
+    $end            reduce using rule 2 (program -> program COMMENT .)
+
+
+state 4
+
+    (17) program -> program line .
+
+    COMMENT         reduce using rule 17 (program -> program line .)
+    LABEL           reduce using rule 17 (program -> program line .)
+    INSTR           reduce using rule 17 (program -> program line .)
+    PREGEN          reduce using rule 17 (program -> program line .)
+    GLOBL           reduce using rule 17 (program -> program line .)
+    $end            reduce using rule 17 (program -> program line .)
+
+
+state 5
+
+    (18) program -> program LABEL .
+
+    COMMENT         reduce using rule 18 (program -> program LABEL .)
+    LABEL           reduce using rule 18 (program -> program LABEL .)
+    INSTR           reduce using rule 18 (program -> program LABEL .)
+    PREGEN          reduce using rule 18 (program -> program LABEL .)
+    GLOBL           reduce using rule 18 (program -> program LABEL .)
+    $end            reduce using rule 18 (program -> program LABEL .)
+
+
+state 6
+
+    (19) program -> program pre .
+
+    COMMENT         reduce using rule 19 (program -> program pre .)
+    LABEL           reduce using rule 19 (program -> program pre .)
+    INSTR           reduce using rule 19 (program -> program pre .)
+    PREGEN          reduce using rule 19 (program -> program pre .)
+    GLOBL           reduce using rule 19 (program -> program pre .)
+    $end            reduce using rule 19 (program -> program pre .)
+
+
+state 7
+
+    (13) line -> INSTR . arg COMMA arg COMMA arg
+    (14) line -> INSTR . arg COMMA arg
+    (15) line -> INSTR . arg
+    (16) line -> INSTR .
+    (8) arg -> . CONSTANT
+    (9) arg -> . REGISTER
+    (10) arg -> . LPAREN REGISTER RPAREN
+    (11) arg -> . LABELREF
+    (12) arg -> . CONSTANT LPAREN arg RPAREN
+
+    COMMENT         reduce using rule 16 (line -> INSTR .)
+    LABEL           reduce using rule 16 (line -> INSTR .)
+    INSTR           reduce using rule 16 (line -> INSTR .)
+    PREGEN          reduce using rule 16 (line -> INSTR .)
+    GLOBL           reduce using rule 16 (line -> INSTR .)
+    $end            reduce using rule 16 (line -> INSTR .)
+    CONSTANT        shift and go to state 11
+    REGISTER        shift and go to state 12
+    LPAREN          shift and go to state 13
+    LABELREF        shift and go to state 14
+
+    arg                            shift and go to state 10
+
+state 8
+
+    (3) pre -> PREGEN .
+    (4) pre -> PREGEN . STRING
+    (5) pre -> PREGEN . CONSTANT
+    (6) pre -> PREGEN . LABELREF
+
+    COMMENT         reduce using rule 3 (pre -> PREGEN .)
+    LABEL           reduce using rule 3 (pre -> PREGEN .)
+    INSTR           reduce using rule 3 (pre -> PREGEN .)
+    PREGEN          reduce using rule 3 (pre -> PREGEN .)
+    GLOBL           reduce using rule 3 (pre -> PREGEN .)
+    $end            reduce using rule 3 (pre -> PREGEN .)
+    STRING          shift and go to state 15
+    CONSTANT        shift and go to state 16
+    LABELREF        shift and go to state 17
+
+
+state 9
+
+    (7) pre -> GLOBL .
+
+    COMMENT         reduce using rule 7 (pre -> GLOBL .)
+    LABEL           reduce using rule 7 (pre -> GLOBL .)
+    INSTR           reduce using rule 7 (pre -> GLOBL .)
+    PREGEN          reduce using rule 7 (pre -> GLOBL .)
+    GLOBL           reduce using rule 7 (pre -> GLOBL .)
+    $end            reduce using rule 7 (pre -> GLOBL .)
+
+
+state 10
+
+    (13) line -> INSTR arg . COMMA arg COMMA arg
+    (14) line -> INSTR arg . COMMA arg
+    (15) line -> INSTR arg .
+
+    COMMA           shift and go to state 18
+    COMMENT         reduce using rule 15 (line -> INSTR arg .)
+    LABEL           reduce using rule 15 (line -> INSTR arg .)
+    INSTR           reduce using rule 15 (line -> INSTR arg .)
+    PREGEN          reduce using rule 15 (line -> INSTR arg .)
+    GLOBL           reduce using rule 15 (line -> INSTR arg .)
+    $end            reduce using rule 15 (line -> INSTR arg .)
+
+
+state 11
+
+    (8) arg -> CONSTANT .
+    (12) arg -> CONSTANT . LPAREN arg RPAREN
+
+    COMMA           reduce using rule 8 (arg -> CONSTANT .)
+    COMMENT         reduce using rule 8 (arg -> CONSTANT .)
+    LABEL           reduce using rule 8 (arg -> CONSTANT .)
+    INSTR           reduce using rule 8 (arg -> CONSTANT .)
+    PREGEN          reduce using rule 8 (arg -> CONSTANT .)
+    GLOBL           reduce using rule 8 (arg -> CONSTANT .)
+    $end            reduce using rule 8 (arg -> CONSTANT .)
+    RPAREN          reduce using rule 8 (arg -> CONSTANT .)
+    LPAREN          shift and go to state 19
+
+
+state 12
+
+    (9) arg -> REGISTER .
+
+    COMMA           reduce using rule 9 (arg -> REGISTER .)
+    COMMENT         reduce using rule 9 (arg -> REGISTER .)
+    LABEL           reduce using rule 9 (arg -> REGISTER .)
+    INSTR           reduce using rule 9 (arg -> REGISTER .)
+    PREGEN          reduce using rule 9 (arg -> REGISTER .)
+    GLOBL           reduce using rule 9 (arg -> REGISTER .)
+    $end            reduce using rule 9 (arg -> REGISTER .)
+    RPAREN          reduce using rule 9 (arg -> REGISTER .)
+
+
+state 13
+
+    (10) arg -> LPAREN . REGISTER RPAREN
+
+    REGISTER        shift and go to state 20
+
+
+state 14
+
+    (11) arg -> LABELREF .
+
+    COMMA           reduce using rule 11 (arg -> LABELREF .)
+    COMMENT         reduce using rule 11 (arg -> LABELREF .)
+    LABEL           reduce using rule 11 (arg -> LABELREF .)
+    INSTR           reduce using rule 11 (arg -> LABELREF .)
+    PREGEN          reduce using rule 11 (arg -> LABELREF .)
+    GLOBL           reduce using rule 11 (arg -> LABELREF .)
+    $end            reduce using rule 11 (arg -> LABELREF .)
+    RPAREN          reduce using rule 11 (arg -> LABELREF .)
+
+
+state 15
+
+    (4) pre -> PREGEN STRING .
+
+    COMMENT         reduce using rule 4 (pre -> PREGEN STRING .)
+    LABEL           reduce using rule 4 (pre -> PREGEN STRING .)
+    INSTR           reduce using rule 4 (pre -> PREGEN STRING .)
+    PREGEN          reduce using rule 4 (pre -> PREGEN STRING .)
+    GLOBL           reduce using rule 4 (pre -> PREGEN STRING .)
+    $end            reduce using rule 4 (pre -> PREGEN STRING .)
+
+
+state 16
+
+    (5) pre -> PREGEN CONSTANT .
+
+    COMMENT         reduce using rule 5 (pre -> PREGEN CONSTANT .)
+    LABEL           reduce using rule 5 (pre -> PREGEN CONSTANT .)
+    INSTR           reduce using rule 5 (pre -> PREGEN CONSTANT .)
+    PREGEN          reduce using rule 5 (pre -> PREGEN CONSTANT .)
+    GLOBL           reduce using rule 5 (pre -> PREGEN CONSTANT .)
+    $end            reduce using rule 5 (pre -> PREGEN CONSTANT .)
+
+
+state 17
+
+    (6) pre -> PREGEN LABELREF .
+
+    COMMENT         reduce using rule 6 (pre -> PREGEN LABELREF .)
+    LABEL           reduce using rule 6 (pre -> PREGEN LABELREF .)
+    INSTR           reduce using rule 6 (pre -> PREGEN LABELREF .)
+    PREGEN          reduce using rule 6 (pre -> PREGEN LABELREF .)
+    GLOBL           reduce using rule 6 (pre -> PREGEN LABELREF .)
+    $end            reduce using rule 6 (pre -> PREGEN LABELREF .)
+
+
+state 18
+
+    (13) line -> INSTR arg COMMA . arg COMMA arg
+    (14) line -> INSTR arg COMMA . arg
+    (8) arg -> . CONSTANT
+    (9) arg -> . REGISTER
+    (10) arg -> . LPAREN REGISTER RPAREN
+    (11) arg -> . LABELREF
+    (12) arg -> . CONSTANT LPAREN arg RPAREN
+
+    CONSTANT        shift and go to state 11
+    REGISTER        shift and go to state 12
+    LPAREN          shift and go to state 13
+    LABELREF        shift and go to state 14
+
+    arg                            shift and go to state 21
+
+state 19
+
+    (12) arg -> CONSTANT LPAREN . arg RPAREN
+    (8) arg -> . CONSTANT
+    (9) arg -> . REGISTER
+    (10) arg -> . LPAREN REGISTER RPAREN
+    (11) arg -> . LABELREF
+    (12) arg -> . CONSTANT LPAREN arg RPAREN
+
+    CONSTANT        shift and go to state 11
+    REGISTER        shift and go to state 12
+    LPAREN          shift and go to state 13
+    LABELREF        shift and go to state 14
+
+    arg                            shift and go to state 22
+
+state 20
+
+    (10) arg -> LPAREN REGISTER . RPAREN
+
+    RPAREN          shift and go to state 23
+
+
+state 21
+
+    (13) line -> INSTR arg COMMA arg . COMMA arg
+    (14) line -> INSTR arg COMMA arg .
+
+    COMMA           shift and go to state 24
+    COMMENT         reduce using rule 14 (line -> INSTR arg COMMA arg .)
+    LABEL           reduce using rule 14 (line -> INSTR arg COMMA arg .)
+    INSTR           reduce using rule 14 (line -> INSTR arg COMMA arg .)
+    PREGEN          reduce using rule 14 (line -> INSTR arg COMMA arg .)
+    GLOBL           reduce using rule 14 (line -> INSTR arg COMMA arg .)
+    $end            reduce using rule 14 (line -> INSTR arg COMMA arg .)
+
+
+state 22
+
+    (12) arg -> CONSTANT LPAREN arg . RPAREN
+
+    RPAREN          shift and go to state 25
+
+
+state 23
+
+    (10) arg -> LPAREN REGISTER RPAREN .
+
+    COMMA           reduce using rule 10 (arg -> LPAREN REGISTER RPAREN .)
+    COMMENT         reduce using rule 10 (arg -> LPAREN REGISTER RPAREN .)
+    LABEL           reduce using rule 10 (arg -> LPAREN REGISTER RPAREN .)
+    INSTR           reduce using rule 10 (arg -> LPAREN REGISTER RPAREN .)
+    PREGEN          reduce using rule 10 (arg -> LPAREN REGISTER RPAREN .)
+    GLOBL           reduce using rule 10 (arg -> LPAREN REGISTER RPAREN .)
+    $end            reduce using rule 10 (arg -> LPAREN REGISTER RPAREN .)
+    RPAREN          reduce using rule 10 (arg -> LPAREN REGISTER RPAREN .)
+
+
+state 24
+
+    (13) line -> INSTR arg COMMA arg COMMA . arg
+    (8) arg -> . CONSTANT
+    (9) arg -> . REGISTER
+    (10) arg -> . LPAREN REGISTER RPAREN
+    (11) arg -> . LABELREF
+    (12) arg -> . CONSTANT LPAREN arg RPAREN
+
+    CONSTANT        shift and go to state 11
+    REGISTER        shift and go to state 12
+    LPAREN          shift and go to state 13
+    LABELREF        shift and go to state 14
+
+    arg                            shift and go to state 26
+
+state 25
+
+    (12) arg -> CONSTANT LPAREN arg RPAREN .
+
+    COMMA           reduce using rule 12 (arg -> CONSTANT LPAREN arg RPAREN .)
+    COMMENT         reduce using rule 12 (arg -> CONSTANT LPAREN arg RPAREN .)
+    LABEL           reduce using rule 12 (arg -> CONSTANT LPAREN arg RPAREN .)
+    INSTR           reduce using rule 12 (arg -> CONSTANT LPAREN arg RPAREN .)
+    PREGEN          reduce using rule 12 (arg -> CONSTANT LPAREN arg RPAREN .)
+    GLOBL           reduce using rule 12 (arg -> CONSTANT LPAREN arg RPAREN .)
+    $end            reduce using rule 12 (arg -> CONSTANT LPAREN arg RPAREN .)
+    RPAREN          reduce using rule 12 (arg -> CONSTANT LPAREN arg RPAREN .)
+
+
+state 26
+
+    (13) line -> INSTR arg COMMA arg COMMA arg .
+
+    COMMENT         reduce using rule 13 (line -> INSTR arg COMMA arg COMMA arg .)
+    LABEL           reduce using rule 13 (line -> INSTR arg COMMA arg COMMA arg .)
+    INSTR           reduce using rule 13 (line -> INSTR arg COMMA arg COMMA arg .)
+    PREGEN          reduce using rule 13 (line -> INSTR arg COMMA arg COMMA arg .)
+    GLOBL           reduce using rule 13 (line -> INSTR arg COMMA arg COMMA arg .)
+    $end            reduce using rule 13 (line -> INSTR arg COMMA arg COMMA arg .)
+
